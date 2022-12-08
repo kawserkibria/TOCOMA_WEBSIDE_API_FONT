@@ -1,0 +1,166 @@
+﻿@page "/Login"
+@layout LoginLayout
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+@inject NavigationManager navmanager
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@using System.Security.Claims
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime js
+@*@using Tocoma_ERP_System.Authentication*@
+
+
+
+<div class="dashboard-main">
+    <div class="top-header p-4  border-bottom">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 d-flex justify-content-center">
+                    <img src="images/logo.png" alt="logo">
+
+
+                </div>
+                @*<label style="float:right">Login</label>
+                <label style="margin-left:20px">Register</label>*@
+
+                <!-- <div class="col-lg-5 d-flex align-items-center m-auto">
+                    <p class="m-0">Welcome, <span>Admin User</span> | System Admin, <span>HR and Admin</span> | My Account | <span style="color: rgb(255, 208, 0)">Logout</span> </p>
+                </div> -->
+
+            </div>
+
+        </div>
+
+    </div>
+    @*@Body*@
+    <div class="login-main">
+        <div class="login-main-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="login-left">
+                            <img src="images/chart-vector-113750.jpg" alt="" class="ml-5 mb-4" width="100" height="100">
+                            <p>Tocoma ERP System Application</p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-12 col-sm-8 m-auto">
+                                <label style="background-color:red;color:white;font-size:20px">@message</label>
+                                <div class="login-right">
+
+                                    <div class="card">
+                                        <div class="card-body px-3 py-5">
+                                            <div class="row">
+                                                <div class="col-2 d-flex align-items-center">
+                                                    <img src="images/login-icon.png" alt="">
+                                                </div>
+                                                <div class="col-10">
+                                                    <EditForm Model="usermodel" OnValidSubmit="UserLogin">
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <InputText class="form-control form-control-md" @bind-Value="@usermodel.LOGIN_ID" placeholder="Email"></InputText>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <InputText class="form-control form-control-md" type="password" @bind-Value="@usermodel.PASSWORD" placeholder="Password"></InputText>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-10">
+                                                                <button type="submit" class="btn btn-primary btn-block" style="width:150px">Sign in</button>
+                                                                <br />
+                                                                <input style="width:20px" type="checkbox" /> Remember Password | &nbsp;
+                                                                <a href="#">Forgot Password ?</a>
+                                                            </div>
+                                                        </div>
+                                                    </EditForm>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer>
+        <h6 class="text-center m-0">Copyright &copy; All rights reserved.</h6>
+    </footer>
+</div>
+
+@code
+{
+    UserModel usermodel = new UserModel();
+    UserModel loginUser = new UserModel();
+    string message;
+    ClaimsPrincipal claimsPrincipal;
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        //usermodel = new UserModel();
+
+        //claimsPrincipal = (await authenticationStateTask).User;
+
+        //if (claimsPrincipal.Identity.IsAuthenticated)
+        //{
+        //    UriHelper.NavigateTo("/Home");
+        //}
+        //if(await sessionStorage.GetItemAsync<string>("session_employeeLoginId")!=null)
+        //{ UriHelper.NavigateTo("/Home"); }
+        //else { UriHelper.NavigateTo("/"); }
+
+        //{
+        //    usermodel.LOGIN_ID = "philip.cramer@gmail.com";
+        //    usermodel.PASSWORD = "philip.cramer";
+        //}
+
+    }
+    private async Task UserLogin()
+    {
+        try
+        {
+            if(usermodel.LOGIN_ID==null || usermodel.LOGIN_ID=="" || usermodel.PASSWORD==null || usermodel.PASSWORD=="")
+            {
+                await js.InvokeVoidAsync("alert", " User Name or Password Is Empty");
+                return;
+            }
+            else
+            {
+                loginUser = await Http.PostJsonAsync<UserModel>(Utility.BaseUrl + "api/Authentication/UserLogin", usermodel);
+                if (loginUser.PASSWORD != usermodel.PASSWORD)
+                {
+                    await js.InvokeVoidAsync("alert", "Invalid User Name or Password");
+                    return;
+                }
+                await sessionStorage.SetItemAsync("session_employeeName", loginUser.EMPLOYEE_NAME);
+                await sessionStorage.SetItemAsync("session_employeeId", loginUser.EMPLOYEE_ID);
+                await sessionStorage.SetItemAsync("session_employeeDesignation", loginUser.DESIGNATION);
+                await sessionStorage.SetItemAsync("session_employeeDepartment", loginUser.DEPARTMENT_NAME);
+                await sessionStorage.SetItemAsync("session_employeeDepartmentId", loginUser.DEPARTMENT_ID);
+                await sessionStorage.SetItemAsync("session_employeeLoginId", loginUser.LOGIN_ID);
+                await sessionStorage.SetItemAsync("session_userRoleId", loginUser.USER_ROLE_ID);
+                await sessionStorage.SetItemAsync("session_userId", loginUser.USER_ID);
+
+                UriHelper.NavigateTo("/Home");
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+    }
+}

@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "restore": {
+    "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj": {}
+  },
+  "projects": {
+    "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj",
+        "projectName": "TOCOMA_ERP_System",
+        "projectPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj",
+        "packagesPath": "C:\\Users\\Kibria\\.nuget\\packages\\",
+        "outputPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Kibria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://www.nuget.org/api/v2/": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Blazored.SessionStorage": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Blazored.Toast": {
+              "target": "Package",
+              "version": "[3.2.2, )"
+            },
+            "Microsoft.AspNetCore.Hosting": {
+              "target": "Package",
+              "version": "[2.2.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

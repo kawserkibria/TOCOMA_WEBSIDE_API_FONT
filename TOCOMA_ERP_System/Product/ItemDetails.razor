@@ -1,0 +1,182 @@
+﻿@page "/ItemDetails/{ItemCode}"
+@layout CustomLayout
+@inject HttpClient Http
+@using System.IO
+@inject IWebHostEnvironment env
+@inject IJSRuntime JSRuntime
+
+
+    
+
+
+<div class="container-fluid" style="height:1200px">
+
+    <div class="row">
+        <div class="col-2">
+            <img src="@itemDetails.ITEM_IMAGE" style="width:250px;height:170px" />
+        </div>
+        <div class="col-10">
+            <h2 style="margin-top:20px">@itemDetails.ITEM_NAME</h2>
+            <br />
+            <p><b>Category:</b> @itemDetails.CATEGORY_NAME</p>
+            <p><b>Brand:</b> @itemDetails.BRAND_NAME</p>
+            <p><b>Brand Origin Country:</b> @itemDetails.BRAND_ORIGIN_COUNTRY</p>
+            <p><b>Made In Country:</b> @itemDetails.MAID_IN_COUNTRY</p>
+            <p><b>Import From:</b> @itemDetails.IMPORT_FROM</p>
+
+            <hr />
+            <h6>About This Item</h6>
+            <p>@((MarkupString)@itemDetails.SHORT_DESCRIPTION)</p>
+
+            <p>@((MarkupString)@itemDetails.LONG_DESCRIPTION)</p>
+
+            <h4>Application Video</h4>
+            @foreach (var item in videolist)
+            {
+                <video controls="controls" width="400px" height="300px">
+                    <source src="/Video/@item" type="video/mp4" />
+                </video>
+            }
+
+            <br />
+            <br />
+            @if (tdslist != null && tdslist.Count > 0)
+            {
+                <h3>TDS/Datasheet Download</h3>
+                <table width="70%">
+                    <tbody>
+                        @foreach (var item in tdslist)
+                        {
+                            <tr>
+                                <td style="width:90%"><p>@item</p></td>
+                                <td style="width:10%"><button class="raise" style="background-color: black; color: white" @onclick=@(() => DownloadTDS(item))>Download</button></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+            <br />
+            <br />
+            @if (sdslist != null && sdslist.Count > 0)
+            {
+                <h2>SDS Download</h2>
+                <table width="70%">
+                    <tbody>
+                        @foreach (var item in sdslist)
+                        {
+                            <tr>
+                                <td style="width:90%"><p>@item</p></td>
+                                <td style="width:10%"><button style="background-color: black; color: white" @onclick=@(() => DownloadSDS(item))>Download</button></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+    @*<div class="row">
+            <h4>Application</h4>
+            <video controls="controls" width="400px" height="300px">
+                <source src="/Video/waterproof.mp4" type="video/mp4" />
+            </video>
+
+        </div>*@
+
+
+</div>
+
+@code {
+    [Parameter]
+    public string ItemCode { get; set; }
+    ItemViewModel itemDetails = new ItemViewModel();
+    List<string> tdslist = new List<string>();
+    List<string> sdslist = new List<string>();
+    List<string> videolist = new List<string>();
+    protected override async Task OnInitializedAsync()
+    {
+        itemDetails = await Http.GetJsonAsync<ItemViewModel>(Utility.BaseUrl + "api/Product/GetItemByCode/" + ItemCode);
+        var path = $"{env.WebRootPath}\\images\\File\\TDS";
+        string[] tdsfilelist = Directory.GetFiles(path);
+
+        var sdspath = $"{env.WebRootPath}\\images\\File\\SDS";
+        string[] sdsfilelist = Directory.GetFiles(sdspath);
+
+        var videoPath = $"{env.WebRootPath}\\Video";
+        string[] allvideolist = Directory.GetFiles(videoPath);
+
+        List<string> file = new List<string>();
+        //itemDetails.ITEM_CODE = "100";
+        foreach (var item in tdsfilelist)
+        {
+            if (item.Contains(itemDetails.ITEM_CODE))
+            {
+                tdslist.Add(Path.GetFileName(item));
+            }
+
+        }
+        //----------------
+        foreach (var item in sdsfilelist)
+        {
+            if (item.Contains(itemDetails.ITEM_CODE))
+            {
+                sdslist.Add(Path.GetFileName(item));
+            }
+
+        }
+        //--------------
+        foreach (var item in allvideolist)
+        {
+            if (item.Contains(itemDetails.ITEM_CODE))
+            {
+                videolist.Add(Path.GetFileName(item));
+            }
+
+        }
+
+    }
+    private async Task DownloadTDS(string item)
+    {
+        try
+        {
+            //var path = $"{env.WebRootPath}\\images\\File\\TDS";
+            var path = "images//File//TDS";
+            var fileName = item;
+            //var fileURL = "https://localhost:5001/files/quote.txt";
+            var fileURL = path + "//" + item;
+            await JSRuntime.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
+        }
+        catch (Exception EX)
+        {
+
+        }
+
+    }
+    private async Task DownloadSDS(string item)
+    {
+        try
+        {
+            //var path = $"{env.WebRootPath}\\images\\File\\TDS";
+            var path = "images//File//SDS";
+            var fileName = item;
+            //var fileURL = "https://localhost:5001/files/quote.txt";
+            var fileURL = path + "//" + item;
+            await JSRuntime.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
+        }
+        catch (Exception EX)
+        {
+
+        }
+
+    }
+
+}

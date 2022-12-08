@@ -1,0 +1,77 @@
+﻿@page "/SalesOrderList"
+@layout CustomLayout
+@inject HttpClient Http
+@inject IToastService toastService
+@inject IJSRuntime JSRuntime
+@using Blazored.Typeahead
+@inject Microsoft.JSInterop.IJSRuntime JsRuntime
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+
+
+<style>
+    th {
+        font-weight: normal;
+        font-size: 13px;
+    }
+
+    th,
+    td {
+        border: 1px solid #888;
+        /*padding: 0.25em 0.5em;*/
+    }
+</style>
+<div class="container-fluid">
+
+    <div class="table-responsive overflow-initial customviews-table">
+        <table id="ember2857" class="table zi-table table-hover ember-view header-fixed">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Sales Order No</th>
+                    <th>PO/WO NUMBER</th>
+                    <th>PO/WO DATE</th>
+                    <th>CUSTOMER</th>
+                    <th>DELIVERY DATE</th>
+                    <th>SALES TOTAL</th>
+                    <th>Sataus</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (salesOrderList != null)
+                {
+                    foreach (var item in salesOrderList)
+                    {
+                <tr>
+                    <td style="text-align:center;width:30px"><a href="EditSalesOrder/@item.SALES_ORDER_NO"><span class="oi oi-pencil"></span></a></td>
+                    <td style="width:150px"><a href="SalesDetails/@item.SALES_ORDER_NO">@item.SALES_ORDER_NO</a></td>
+                    <td>@item.PO_WO_NUMBER</td>
+                    <td>@item.PO_WO_DATE</td>
+                    <td>@item.CUSTOMER_NAME</td>
+                    <td>@item.DELIVERY_DATE</td>
+                    <td>@item.GRAND_TOTAL</td>
+                    <td></td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@code {
+    List<SalesOrderViewModel> salesOrderList = new List<SalesOrderViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            salesOrderList = await Http.GetJsonAsync<List<SalesOrderViewModel>>(Utility.BaseUrl + "api/Sales/GetSalesOrderInfo");
+        }
+        catch(Exception ex)
+        {
+
+        }
+
+    }
+
+}

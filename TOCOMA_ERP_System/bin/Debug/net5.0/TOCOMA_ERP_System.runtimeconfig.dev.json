@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Kibria\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Kibria\\.nuget\\packages"
+    ]
+  }
+}
