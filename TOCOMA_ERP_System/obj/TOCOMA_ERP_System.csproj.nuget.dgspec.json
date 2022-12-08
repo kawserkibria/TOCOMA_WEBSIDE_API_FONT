@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj": {}
+    "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj": {}
   },
   "projects": {
-    "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj": {
+    "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj",
+        "projectUniqueName": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj",
         "projectName": "TOCOMA_ERP_System",
-        "projectPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj",
+        "projectPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_System\\TOCOMA_ERP_System.csproj",
         "packagesPath": "C:\\Users\\Kibria\\.nuget\\packages\\",
-        "outputPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_System\\obj\\",
+        "outputPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_System\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Kibria\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_ClassLibrary\\TOCOMA_ERP_ClassLibrary.csproj",
+      "projectUniqueName": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_ClassLibrary\\TOCOMA_ERP_ClassLibrary.csproj",
       "projectName": "TOCOMA_ERP_ClassLibrary",
-      "projectPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_ClassLibrary\\TOCOMA_ERP_ClassLibrary.csproj",
+      "projectPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_ClassLibrary\\TOCOMA_ERP_ClassLibrary.csproj",
       "packagesPath": "C:\\Users\\Kibria\\.nuget\\packages\\",
-      "outputPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_ERP_ClassLibrary\\obj\\",
+      "outputPath": "G:\\TOCOMA\\TOCOMA_ERP_System\\TOCOMA_WEBSIDE_API_FONT\\TOCOMA_ERP_ClassLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kibria\\AppData\\Roaming\\NuGet\\NuGet.Config",

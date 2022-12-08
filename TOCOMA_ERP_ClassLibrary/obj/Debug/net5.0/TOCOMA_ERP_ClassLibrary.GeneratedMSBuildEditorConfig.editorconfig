@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = TOCOMA_ERP_ClassLibrary
-build_property.ProjectDir = G:\TOCOMA\TOCOMA_ERP_System\TOCOMA_ERP_ClassLibrary\
+build_property.ProjectDir = G:\TOCOMA\TOCOMA_ERP_System\TOCOMA_WEBSIDE_API_FONT\TOCOMA_ERP_ClassLibrary\
